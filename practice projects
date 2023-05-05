@@ -1,0 +1,20 @@
+# x = open("D:\Rohan\Python\mlao.txt","r+")
+# for i in range(2):
+#     n=input("Name: ")
+#     a=input("Age: ")
+#     x.write("Name:"+n+"\t"+"Age:"+a+"\n")
+
+# v=0; c=0
+# for y in x:
+#     for i in y:
+#         if i in "AEIOUaeiou":
+#             v+=1
+#         elif i.isalpha()==True:
+#             c+=1
+#         print(i)
+# x.close()
+# print("Vowels:",v,"\tConsonants:",c)
+
+f = open("D:\Rohan\Python\wen.txt",'create')
+f.write("sample text")
+f.close()
