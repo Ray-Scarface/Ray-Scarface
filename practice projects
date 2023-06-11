@@ -22,6 +22,7 @@ s=pyg.display.set_mode((700,500))
 
 start=0,0
 size=0,0
+end=0,0
 drawing=False
 rect_lt=[]
 
@@ -31,7 +32,6 @@ pyg.display.update()
 run=1
 while run==1:
     for event in pyg.event.get():
-        print(event)
         if event.type==pyg.QUIT:
             run=0
         elif event.type==KEYDOWN:
@@ -49,7 +49,10 @@ while run==1:
             
         elif event.type==MOUSEBUTTONUP:
             end=event.pos
-            size=end[0]-start[0],end[1]-start[1]
+            if end[0]>start[0] and end[1]>start[1]:
+                size=end[0]-start[0],end[1]-start[1]
+            elif end[0]<start[0] and end[1]<start[1]:
+                size=start[0]-end[0],start[1]-end[1]
             drawing=False
             rect=pyg.Rect(start,size)
             rect_lt.append(rect)
@@ -57,11 +60,19 @@ while run==1:
 
         elif event.type==MOUSEMOTION and drawing==True:
             end=event.pos
-            size=end[0]-start[0],end[1]-start[1]
+            if end[0]>start[0] and end[1]>start[1]:
+                size=end[0]-start[0],end[1]-start[1]
+            elif end[0]<start[0] and end[1]<start[1]:
+                size=start[0]-end[0],start[1]-end[1]
+
+        
     s.fill(GRAY)
     for i in rect_lt:
         pyg.draw.rect(s,RED,i,4)
-    pyg.draw.rect(s,RED,(start,size),4)   
+    pyg.draw.rect(s,RED,(start,size),4)
+    print(start,end, size)
+    pyg.draw.rect(s,RED,((39,35),(116,89)),4)
+    pyg.draw.rect(s,RED,((39,35),(77,54)),4)
 
     pyg.display.update()
 
